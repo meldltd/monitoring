@@ -1,0 +1,83 @@
+{
+  "checks": [
+    {
+      "identifier": "Database PG",
+      "type": "pg",
+      "method": "query",
+      "expect": "2",
+      "interval": 30,
+      "timeout": 10,
+      "DSN": "host=db.check.com port=5432 user=readonlyuser password=xxxx dbname=db sslmode=require",
+      "notifications": [
+        {
+          "type": "webhook",
+          "params": {
+            "url": "https://hooks.slack.com/services/XXXX/XXXX/AAAAA",
+            "text": "text"
+          }
+        }
+      ]
+    },
+    {
+      "identifier": "SERVER SSH",
+      "type": "ssh",
+      "method": "connect",
+      "interval": 60,
+      "timeout": 30,
+      "DSN": "server.ssh.com:22",
+      "notifications": [
+        {
+          "type": "webhook",
+          "params": {
+            "url": "https://hooks.slack.com/services/XXXX/XXXX/AAAAA",
+            "text": "text"
+          }
+        }
+      ],
+      "DSNParams": {
+        "user": "test",
+        "pass": "testPassword"
+      }
+    },
+    {
+      "identifier": "TLS CERT",
+      "type": "tls",
+      "method": "expires",
+      "interval": 7200,
+      "timeout": 30,
+      "DSN": "website.com:443",
+      "notifications": [
+        {
+          "type": "webhook",
+          "params": {
+            "url": "https://hooks.slack.com/services/XXXX/XXXX/AAAAA",
+            "text": "text"
+          }
+        }
+      ],
+      "DSNParams": {
+        "daysBefore": "30"
+      }
+    },
+    {
+      "identifier": "AWS cost notification",
+      "type": "awscost",
+      "tags": [
+        "success"
+      ],
+      "method": "report",
+      "interval": 5,
+      "timeout": 30,
+      "DSN": "KEY_ID@SECRET_KEY",
+      "notifications": [
+        {
+          "type": "webhook",
+          "params": {
+            "url": "https://hooks.slack.com/services/XXXX/XXXX/AAAAA",
+            "text": "text"
+          }
+        }
+      ]
+    }
+  ]
+}
